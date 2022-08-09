@@ -1,0 +1,19 @@
+//Interfacing 7 segment LED display with PIC16F877A Microcontroller
+#include <xc.h>
+#define _XTAL_FREQ 20000000//set crystal frequency
+__CONFIG(FOSC_HS & WDTE_OFF & PWRTE_OFF & BOREN_OFF & LVP_ON & CPD_OFF & WRT_OFF & CP_OFF);//set configuration bit
+unsigned char segment[]={0x3f,0x06,0x5b,0x4f,0x66,0x6d,0x7c,0x07,0x7f,0x6f} ,i=0;
+//defined an unsigned character array with 10 elements
+void main(void) 
+{
+    TRISC =0x00;// set Port C as an output.
+    while(1)
+    {
+        for(i=0;i<10;i++)
+        {
+            PORTC = segment[i];
+        __delay_ms(1000);
+        }
+    }
+    return;
+}
